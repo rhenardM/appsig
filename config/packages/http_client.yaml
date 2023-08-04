@@ -1,0 +1,8 @@
+framework :
+  http_client:
+    scoped_clients:
+      yousign.client:
+        base_uri: 'https://api-sandbox.yousign.app/v3'
+        headers: 
+            Accept: 'application/json'
+            api_key: 6CAnphpaEhTkzzQ71yXQPyr7PXFCBHs4                          
