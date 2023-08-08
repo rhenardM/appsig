@@ -99,8 +99,6 @@ class ContratController extends AbstractController
             $file = $this->getParameter('kernel.project_dir').'/pdf/'.$filename;
 
             $contrat->setPdfSansSignature($filename);
-            //$contratRepository->save($contrat, true);
-
             file_put_contents($file, $output);
 
             return $this->redirectToRoute('app_contrat_show', ['id' => $contrat->getId()], Response::HTTP_SEE_OTHER );

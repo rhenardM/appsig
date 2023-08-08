@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}DocFinance{% endblock %}
+
+{% block body %}
+    <h1>DocFinance</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ doc_finance.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ doc_finance.nom }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ doc_finance.type }}</td>
+            </tr>
+            <tr>
+                <th>Objet</th>
+                <td>{{ doc_finance.objet }}</td>
+            </tr>
+            <tr>
+                <th>File</th>
+                <td>{{ doc_finance.file }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ doc_finance.date ? doc_finance.date|date('Y-m-d') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_doc_finance_index') }}">back to list</a>
+
+    <a href="{{ path('app_doc_finance_edit', {'id': doc_finance.id}) }}">edit</a>
+
+    {{ include('doc_finance/_delete_form.html.twig') }}
+{% endblock %}

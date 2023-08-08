@@ -1,0 +1,45 @@
+{#{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }#}
+
+{{ form_start(form) }}</br>
+					<div class="col-sm-3">
+						{{ form_row(form.name, {'attr':{'class':'form-control', 'placeholder':'nom'}}) }}
+					</div>
+
+					<div class="col-sm-3">
+						{{ form_row(form.type, {'attr':{'class':'form-control', 'placeholder':'prenom'}}) }}
+					</div>
+				</div>
+
+				<div class="row mb-3">
+					<div class="col-sm-4">
+						{{ form_row(form.objet, {'attr':{'class':'form-control', 'placeholder':''}}) }}
+					</div>
+				</div>
+
+				<div class="row mb-3">
+					<div class="col-sm-4">
+						{{ form_row(form.provenance, {'attr':{'class':'form-control', 'placeholder':'exemple@mail.com '}}) }}
+					</div>
+				</div>
+
+				<div class="row mb-3">
+					<div id="formFile" class="col-sm-3">
+						{{ form_row(form.file, {'attr':{'class':'form-control', 'type':'file'}}) }}
+					</div>
+					<div class="row mb-3">
+						<div class="col-sm-4">
+							{{ form_row(form.date, {'attr':{'class':'form-control', 'placeholder':'exemple.com'}}) }}
+						</div>
+					</div>
+                    {{ form_widget(form) }}
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

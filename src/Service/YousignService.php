@@ -14,7 +14,7 @@ class YousignService
         private HttpClientInterface $yousignClient,
     ){}
 
-        // 1 - Initial a signature request
+// 1 - Initial a signature request
     public function signatureRequest(): array
         {
             $response = $this->yousignClient->request(
@@ -34,7 +34,7 @@ class YousignService
 
                 ]
             );
-
+            
             $statusCode = $response->getStatusCode();
 
             if ($statusCode !== 201){
@@ -43,7 +43,7 @@ class YousignService
             return $response->toArray(); 
         }
 
-    // 2 - Uplode a document 
+// 2 - Uplode a document 
     
     public function uploadDocument(string $signatureRequestId, string $filename): array
     {
@@ -73,7 +73,7 @@ class YousignService
         return $response->toArray(); 
     }
 
-        // 3 Add a signature
+// 3 Add a signature
         
     public function addSigner(
         string $signatureRequestId,

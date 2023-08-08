@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Document index{% endblock %}
+
+{% block body %}
+    <h1>Document index</h1>
+
+    <main id="main" class="main">
+    <div class="pagetitle">
+      <h1></h1>
+      <nav>
+        <ol class="breadcrumb">
+          <!--<li class="breadcrumb-item"><a href=""></a></li>
+          <li class="breadcrumb-item"></li>
+          <li class="breadcrumb-item active"></li>-->
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+  <div class=" d-flex justify-content">
+    <a class="btn btn-primary btn-sm" href=""><i class="bi bi-plus-lg"></i> Nouveau</a>
+    </div><!-- End Logo --> <br>
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title"></h5>
+                    <table class="table datatable">
+                        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Objet</th>
+                <th>Provenance</th>
+                <th>Fichier déposer</th>
+                <th>Date</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for document in documents %}
+            <tr>
+                <td>{{ document.id }}</td>
+                <td>{{ document.name }}</td>
+                <td>{{ document.type }}</td>
+                <td>{{ document.objet }}</td>
+                <td>{{ document.provenance }}</td>
+                <td>{{ document.file }}</td>
+                <td>{{ document.date ? document.date|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_document_show', {'id': document.id}) }}">show</a>
+                    <a href="{{ path('app_document_edit', {'id': document.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+                </tbody>
+                    </table>
+    </div>
+        </div>
+    </section>
+</main><!-- End #main -->
+    </div>
+
+    <a href="{{ path('app_document_new') }}">Create new</a>
+{% endblock %}

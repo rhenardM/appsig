@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}DocLettre index{% endblock %}
+
+{% block body %}
+    <h1>DocLettre index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Type</th>
+                <th>Objet</th>
+                <th>Provenace</th>
+                <th>File</th>
+                <th>Date</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for doc_lettre in doc_lettres %}
+            <tr>
+                <td>{{ doc_lettre.id }}</td>
+                <td>{{ doc_lettre.nom }}</td>
+                <td>{{ doc_lettre.type }}</td>
+                <td>{{ doc_lettre.objet }}</td>
+                <td>{{ doc_lettre.provenace }}</td>
+                <td>{{ doc_lettre.file }}</td>
+                <td>{{ doc_lettre.date ? doc_lettre.date|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_doc_lettre_show', {'id': doc_lettre.id}) }}">show</a>
+                    <a href="{{ path('app_doc_lettre_edit', {'id': doc_lettre.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_doc_lettre_new') }}">Create new</a>
+{% endblock %}

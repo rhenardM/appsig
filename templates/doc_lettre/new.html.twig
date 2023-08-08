@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New DocLettre{% endblock %}
+
+{% block body %}
+    <h1>Create new DocLettre</h1>
+
+    {{ include('doc_lettre/_form.html.twig') }}
+
+    <a href="{{ path('app_doc_lettre_index') }}">back to list</a>
+{% endblock %}
