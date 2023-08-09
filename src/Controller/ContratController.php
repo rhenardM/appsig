@@ -71,41 +71,30 @@ class ContratController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_contrat_delete', methods: ['POST'])]
-    public function delete(Request $request, Contrat $contrat, EntityManagerInterface $entityManager): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$contrat->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($contrat);
-            $entityManager->flush();
-        }
+// Génération du document HTML du PDF
+#[Route('/{id}/pdf', name: 'app_contrat_pdf', methods: ['GET'])]
+public function pdf(Request $request, Contrat $contrat, ContratRepository $contratRepository)
+{
+    // Générer le contenu HTML du PDF
+    $html = $this->renderView('contrat/pdf.html.twig', [
+        'contrat' => $contrat,
+    ]);
 
-        return $this->redirectToRoute('app_contrat_index', [], Response::HTTP_SEE_OTHER);
-    }
+    // Créer une instance de Dompdf et charger le contenu HTML
+    $dompdf = new Dompdf();
+    $dompdf->loadHtml($html);
 
-        #[Route('/{id}/pdf', name: 'app_contrat_pdf', methods: ['GET'])]
-    public function pdf(Request $request, Contrat $contrat, ContratRepository $contratRepository)
-        {
-            $dompdf = new Dompdf();
-            $html = $this->renderView('contrat/pdf.html.twig', [
-                'contrat' => $contrat,
-            ]);
-            
-            $dompdf->loadHtml($html);
-            $dompdf->setPaper('A4', 'Portrait');
-            $dompdf->render();
+    // Rendre le PDF
+    $dompdf->render();
 
-            $output = $dompdf->output();
-            $filename = 'contrat_'.$contrat->getId().'.pdf';
-            $file = $this->getParameter('kernel.project_dir').'/pdf/'.$filename;
+    // Renvoyer le contenu du PDF dans la réponse HTTP
+    return new Response($dompdf->output(), 200, array(
+        'Content-Type' => 'application/pdf',
+        'Content-Disposition' => 'inline; filename="document.pdf"'
+    ));
+}
 
-            $contrat->setPdfSansSignature($filename);
-            file_put_contents($file, $output);
-
-            return $this->redirectToRoute('app_contrat_show', ['id' => $contrat->getId()], Response::HTTP_SEE_OTHER );
-            //return $this->redirectToRoute('app_contrat_pdf', [], Response::HTTP_SEE_OTHER);
-        }
-
-            #[Route('/{id}/signature', name: 'app_contrat_signature', methods: ['GET'])]
+    #[Route('/{id}/signature', name: 'app_contrat_signature', methods: ['GET'])]
     public function signature(Contrat $contrat, ContratRepository $contratRepository, YousignService $yousignService): Response
             {
                 // 1 - Création de la démande de signature

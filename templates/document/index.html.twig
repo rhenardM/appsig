@@ -3,21 +3,20 @@
 {% block title %}Document index{% endblock %}
 
 {% block body %}
-    <h1>Document index</h1>
-
+    <h1></h1>
     <main id="main" class="main">
     <div class="pagetitle">
-      <h1></h1>
+      <h1>Documents enregistrer</h1>
       <nav>
         <ol class="breadcrumb">
-          <!--<li class="breadcrumb-item"><a href=""></a></li>
-          <li class="breadcrumb-item"></li>
-          <li class="breadcrumb-item active"></li>-->
+          <li class="breadcrumb-item"><a href="accueil.php">Accueil</a></li>
+          <li class="breadcrumb-item">Forms</li>
+          <li class="breadcrumb-item active">Documents</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
   <div class=" d-flex justify-content">
-    <a class="btn btn-primary btn-sm" href=""><i class="bi bi-plus-lg"></i> Nouveau</a>
+    <a class="btn btn-primary btn-sm" href="{{ path('app_document_new') }}"><i class="bi bi-plus-lg"></i> Nouveau</a>
     </div><!-- End Logo --> <br>
     <section class="section">
       <div class="row">
@@ -26,7 +25,7 @@
             <div class="card-body">
               <h5 class="card-title"></h5>
                     <table class="table datatable">
-                        <thead>
+            <thead>
             <tr>
                 <th>Id</th>
                 <th>Name</th>
@@ -49,8 +48,8 @@
                 <td>{{ document.file }}</td>
                 <td>{{ document.date ? document.date|date('Y-m-d') : '' }}</td>
                 <td>
-                    <a href="{{ path('app_document_show', {'id': document.id}) }}">show</a>
-                    <a href="{{ path('app_document_edit', {'id': document.id}) }}">edit</a>
+                  <a class="btn btn-warning btn-sm bi bi-eye-fill"  href="{{ path('app_document_show', {'id': document.id}) }}"></a>
+                  <a class="btn btn-info btn-sm bi bi-pencil-square" href="{{ path('app_document_edit', {'id': document.id}) }}"></a>
                 </td>
             </tr>
         {% else %}
@@ -65,6 +64,4 @@
     </section>
 </main><!-- End #main -->
     </div>
-
-    <a href="{{ path('app_document_new') }}">Create new</a>
 {% endblock %}

@@ -1,0 +1,11 @@
+{#% extends 'base.html.twig' %#}
+
+{% block title %}New GenerationPdfFile{% endblock %}
+
+{% block body %}
+    <h1>Create new GenerationPdfFile</h1>
+
+    {{ include('generation_pdf_file/_form.html.twig') }}
+
+    <a href="{{ path('app_generation_pdf_file_index') }}">back to list</a>
+{% endblock %}

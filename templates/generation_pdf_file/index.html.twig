@@ -1,0 +1,42 @@
+{#% extends 'base.html.twig' %#}
+
+{% block title %}GenerationPdfFile index{% endblock %}
+
+{% block body %}
+    <h1>GenerationPdfFile index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Date</th>
+                <th>ZoneExpediteur</th>
+                <th>ZoneText</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for generation_pdf_file in generation_pdf_files %}
+            <tr>
+                <td>{{ generation_pdf_file.id }}</td>
+                <td>{{ generation_pdf_file.nom }}</td>
+                <td>{{ generation_pdf_file.date ? generation_pdf_file.date|date('Y-m-d') : '' }}</td>
+                <td>{{ generation_pdf_file.zoneExpediteur }}</td>
+                <td>{{ generation_pdf_file.zoneText }}</td>
+                <td>
+                    <a href="{{ path('app_generationPdfFile_pdfFile', {'id': generation_pdf_file.id}) }}">pdf</a>
+                    <a href="{{ path('app_generation_pdf_file_show', {'id': generation_pdf_file.id}) }}">show</a>
+                    <a href="{{ path('app_generation_pdf_file_edit', {'id': generation_pdf_file.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_generation_pdf_file_new') }}">Create new</a>
+{% endblock %}

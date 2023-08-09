@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class DocumentType extends AbstractType
 {
@@ -35,7 +36,11 @@ class DocumentType extends AbstractType
                     ]),
             ],
         ])
-            ->add('date');
+            ->add('date', DateType::class, [
+                'widget'=>'single_text',
+                'label'    => "Date ",
+
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

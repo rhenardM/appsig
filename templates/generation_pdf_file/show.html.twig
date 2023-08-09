@@ -1,0 +1,38 @@
+{#% extends 'base.html.twig' %#}
+
+{% block title %}GenerationPdfFile{% endblock %}
+
+{% block body %}
+    <h1>GenerationPdfFile</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ generation_pdf_file.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ generation_pdf_file.nom }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ generation_pdf_file.date ? generation_pdf_file.date|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>ZoneExpediteur</th>
+                <td>{{ generation_pdf_file.zoneExpediteur }}</td>
+            </tr>
+            <tr>
+                <th>ZoneText</th>
+                <td>{{ generation_pdf_file.zoneText }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_generation_pdf_file_index') }}">back to list</a>
+
+    <a href="{{ path('app_generation_pdf_file_edit', {'id': generation_pdf_file.id}) }}">edit</a>
+
+    {{ include('generation_pdf_file/_delete_form.html.twig') }}
+{% endblock %}
