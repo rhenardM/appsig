@@ -72,7 +72,7 @@ class GenerationPdfFileController extends AbstractController
     #[Route('/{id}', name: 'app_generation_pdf_file_delete', methods: ['POST'])]
     public function delete(Request $request, GenerationPdfFile $generationPdfFile, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$generationPdfFile->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $generationPdfFile->getId(), $request->request->get('_token'))) {
             $entityManager->remove($generationPdfFile);
             $entityManager->flush();
         }
@@ -81,24 +81,24 @@ class GenerationPdfFileController extends AbstractController
     }
 
     #[Route('/{id}/pdf', name: 'app_generationPdfFile_pdfFile', methods: ['GET'])]
-public function pdf(Request $request, GenerationPdfFile $generationPdfFile, GenerationPdfFileRepository $generationPdfFileRepository)
-{
-    // Générer le contenu HTML du PDF
-    $html = $this->renderView('generation_pdf_file/filePdf.html.twig', [
-        'generationPdfFile' => $generationPdfFile,
-    ]);
+    public function pdf(Request $request, GenerationPdfFile $generationPdfFile, GenerationPdfFileRepository $generationPdfFileRepository)
+    {
+        // Générer le contenu HTML du PDF
+        $html = $this->renderView('generation_pdf_file/filePdf.html.twig', [
+            'generationPdfFile' => $generationPdfFile,
+        ]);
 
-    // Créer une instance de Dompdf et charger le contenu HTML
-    $dompdf = new Dompdf();
-    $dompdf->loadHtml($html);
+        // Créer une instance de Dompdf et charger le contenu HTML
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml($html);
 
-    // Rendre le PDF
-    $dompdf->render();
+        // Rendre le PDF
+        $dompdf->render();
 
-    // Renvoyer le contenu du PDF dans la réponse HTTP
-    return new Response($dompdf->output(), 200, array(
-        'Content-Type' => 'application/pdf',
-        'Content-Disposition' => 'inline; filename="document.pdf"'
-    ));
- }
+        // Renvoyer le contenu du PDF dans la réponse HTTP
+        return new Response($dompdf->output(), 200, array(
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'inline; filename="document.pdf"'
+        ));
+    }
 }
